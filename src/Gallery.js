@@ -169,7 +169,7 @@ export default class Gallery extends PureComponent {
         const dx = gestureState.moveX - gestureState.previousMoveX;
         const dy = gestureState.moveY - gestureState.previousMoveY;
 
-        if (dy > 10) {
+        if (Math.abs(dy) > 10) {
             return false;
         }
 
