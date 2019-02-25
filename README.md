@@ -72,6 +72,8 @@ Prop | Description | Type | Default
 `onPageScrollStateChanged` | Called when page scrolling state has changed, see [scroll state and events](#scroll-state-and-events) | `function`
 `onPageScroll` | Scroll event, see [scroll state and events](#scroll-state-and-events) | `function`
 `scrollViewStyle` | Custom style for the `FlatList` component | `object` | `{}`
+`onImageResponderMove` | Event handler passed to image pan responder | `function`
+`onImageResponderReleaseOrTerminate` | Event handler passed to image pan responder | `function`
 `onSingleTapConfirmed` | Fired after a single tap | `function`
 `onLongPress` | Fired after a long press | `function`
 
