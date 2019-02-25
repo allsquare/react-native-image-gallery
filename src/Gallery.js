@@ -167,11 +167,16 @@ export default class Gallery extends PureComponent {
 
         const space = viewTransformer.getAvailableTranslateSpace();
         const dx = gestureState.moveX - gestureState.previousMoveX;
+        const dy = gestureState.moveY - gestureState.previousMoveY;
 
-        if (dx > 0 && space.left <= 0 && this.currentPage > 0) {
+        if (dy > 10) {
+            return false;
+        }
+
+        if (dx > 10 && space.left <= 0 && this.currentPage > 0) {
             return true;
         }
-        if (dx < 0 && space.right <= 0 && this.currentPage < this.pageCount - 1) {
+        if (dx < 10 && space.right <= 0 && this.currentPage < this.pageCount - 1) {
             return true;
         }
         return false;
