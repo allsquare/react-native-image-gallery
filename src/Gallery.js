@@ -136,13 +136,13 @@ export default class Gallery extends PureComponent {
             onMove: (evt, gestureState) => {
                 const currentImageTransformer = this.getCurrentImageTransformer();
                 currentImageTransformer && currentImageTransformer.onResponderMove(evt, gestureState);
-                if (typeof this.props.onImageResponderMove === 'function') this.props.onImageResponderMove(evt, gestureState)
+                if (typeof this.props.onImageResponderMove === 'function') this.props.onImageResponderMove(evt, gestureState);
                 clearTimeout(this._longPressTimeout);
             },
             onEnd: (evt, gestureState) => {
                 const currentImageTransformer = this.getCurrentImageTransformer();
                 currentImageTransformer && currentImageTransformer.onResponderRelease(evt, gestureState);
-                if (typeof this.props.onImageResponderReleaseOrTerminate === 'function') this.props.onImageResponderReleaseOrTerminate(evt, gestureState)
+                if (typeof this.props.onImageResponderReleaseOrTerminate === 'function') this.props.onImageResponderReleaseOrTerminate(evt, gestureState);
                 clearTimeout(this._longPressTimeout);
             }
         };
