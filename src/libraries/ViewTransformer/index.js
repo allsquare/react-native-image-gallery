@@ -54,6 +54,7 @@ export default class ViewTransformer extends React.Component {
         this.onLayout = this.onLayout.bind(this);
         this.cancelAnimation = this.cancelAnimation.bind(this);
         this.contentRect = this.contentRect.bind(this);
+        this.onResponderGrant = this.onResponderGrant.bind(this);
         this.transformedContentRect = this.transformedContentRect.bind(this);
         this.animate = this.animate.bind(this);
 
