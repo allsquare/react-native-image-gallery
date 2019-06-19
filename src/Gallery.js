@@ -88,12 +88,12 @@ export default class Gallery extends PureComponent {
                     }
                     this.props.onGalleryStateChanged && this.props.onGalleryStateChanged(false);
                 }
-                if (this.isHorizontalScroll === undefined) {
+                if (gestureState.numberActiveTouches === 1 && this.isHorizontalScroll === undefined) {
                     if (Math.abs(gestureState.dx) > 20) this.isHorizontalScroll = true
                     else if (Math.abs(gestureState.dy) > 20) this.isHorizontalScroll = false
                     return
                 }
-                else if (this.isHorizontalScroll === false) {
+                else if (gestureState.numberActiveTouches === 1 && this.isHorizontalScroll === false) {
                     if (typeof this.props.onImageResponderMove === 'function') {
                         this.props.onImageResponderMove(evt, gestureState);
                         return
