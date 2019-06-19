@@ -190,10 +190,10 @@ export default class Gallery extends PureComponent {
             return false;
         }
 
-        if (dx > 10 && space.left <= 0 && this.currentPage > 0) {
+        if (dx > 10 && space.left <= 0 && this.currentPage >= 0) {
             return true;
         }
-        if (dx < 10 && space.right <= 0 && this.currentPage < this.pageCount - 1) {
+        if (dx < 10 && space.right <= 0 && this.currentPage <= this.pageCount - 1) {
             return true;
         }
         return false;
