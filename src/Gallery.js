@@ -41,6 +41,7 @@ export default class Gallery extends PureComponent {
     currentPage = 0;
     pageCount = 0;
     gestureResponder = undefined;
+    isHorizontalScroll = undefined;
 
     constructor (props) {
         super(props);
@@ -57,6 +58,8 @@ export default class Gallery extends PureComponent {
 
     componentWillMount () {
         let onResponderReleaseOrTerminate = (evt, gestureState) => {
+            if (typeof this.props.onImageResponderReleaseOrTerminate === 'function'
+                && this.isHorizontalScroll === false) this.props.onImageResponderReleaseOrTerminate(evt, gestureState);
             if (this.activeResponder) {
                 if (this.activeResponder === this.viewPagerResponder &&
                     !this.shouldScrollViewPager(evt, gestureState) &&
@@ -78,15 +81,29 @@ export default class Gallery extends PureComponent {
             onResponderGrant: this.activeImageResponder,
             onResponderMove: (evt, gestureState) => {
                 if (this.firstMove) {
+                    this.isHorizontalScroll = undefined;
                     this.firstMove = false;
                     if (this.shouldScrollViewPager(evt, gestureState)) {
                         this.activeViewPagerResponder(evt, gestureState);
                     }
                     this.props.onGalleryStateChanged && this.props.onGalleryStateChanged(false);
                 }
+                if (this.isHorizontalScroll === undefined) {
+                    if (Math.abs(gestureState.dx) > 20) this.isHorizontalScroll = true
+                    else if (Math.abs(gestureState.dy) > 20) this.isHorizontalScroll = false
+                    return
+                }
+                else if (this.isHorizontalScroll === false) {
+                    if (typeof this.props.onImageResponderMove === 'function') {
+                        this.props.onImageResponderMove(evt, gestureState);
+                        return
+                    }
+                }
                 if (this.activeResponder === this.viewPagerResponder) {
+                    const dy = gestureState.moveY - gestureState.previousMoveY;
                     const dx = gestureState.moveX - gestureState.previousMoveX;
                     const offset = this.getViewPagerInstance().getScrollOffsetFromCurrentPage();
+                    
                     if (dx > 0 && offset > 0 && !this.shouldScrollViewPager(evt, gestureState)) {
                         if (dx > offset) { // active image responder
                             this.getViewPagerInstance().scrollByOffset(offset);
