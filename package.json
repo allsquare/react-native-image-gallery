@@ -1,6 +1,6 @@
 {
   "name": "@allsquare/react-native-image-gallery",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Pure JavaScript image gallery component for iOS and Android",
   "main": "src/Gallery.js",
   "scripts": {
